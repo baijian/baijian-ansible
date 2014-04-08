@@ -1,0 +1,19 @@
+- hosts: all
+
+  vars_files:
+    - ["vars/{{ ansible_distribution }}.yml", "vars/os_defaults.yml"]
+
+  pre_tasks:
+    - name: homebrew should be installed before other tasks
+      shell: command -v brew creates=/usr/local/bin/brew
+      when: ansible_distribution == 'MaxOSX'
+
+  roles:
+    - zsh
+    - bin
+    - git
+    - vim
+    - pyenv
+    - ansible
+    - tmux
+    - rbenv
