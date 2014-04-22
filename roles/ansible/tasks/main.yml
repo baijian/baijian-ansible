@@ -1,0 +1,45 @@
+---
+- name: ensure ~/Software directory is ready
+  file: path=~/Software
+        state=directory
+        recurse=yes
+
+- name: clone ansible
+  git:  repo=https://github.com/ansible/ansible.git
+        dest=~/Software/ansible
+        version=v1.5.4
+        update={{ update_ansible }}
+
+- name: ensure virtualenv for ansible is installed
+  shell: PYENV_VERSION=2.7.6 virtualenv ~/Software/ansible/.virtualenv
+         creates=~/Software/ansible/.virtualenv/bin/activate
+
+- name: ensure dependencies for ansible is installed
+  shell: ~/Software/ansible/.virtualenv/bin/pip install {{ item.name }}
+         creates=~/Software/ansible/.virtualenv/lib/python2.7/site-packages/{{ item.creates }}
+  with_items:
+    - name: paramiko==1.12.2
+      creates: paramiko-1.12.2-py2.7.egg-info
+    - name: Jinjia2==2.7.2
+      creates: Jinjia2-2.7.2-py2.7.egg-info
+    - name: PyYAML==3.10
+      creates: PyYAML-3.10-py2.7-egg-info
+    - name: httplib2==0.8
+      creates: httplib2-0.8-py2.7.egg-info
+
+- name: ensure ansible wrapper is ready
+  template: src=ansible-wrapper
+            dest=~/Bin/ansible-wrapper
+            mode=0755
+
+- name: ensure ansible binaries are linked
+  file: src=~/Bin/ansible-wrapper
+        dest=~/Bin/{{ item }}
+        state=link
+  with_items:
+    - ansible
+    - ansible-playbook
+    - ansible-pull
+    - ansible-doc
+    - ansible-galaxy
+    - ansible-vault

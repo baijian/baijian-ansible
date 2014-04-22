@@ -1,0 +1,27 @@
+[core]
+    autocrlf = input
+    whitespace = trailing-space,space-before-tab,indent-with-non-tab
+
+[user]
+    name = 柏健
+    email = jian.baij@gmail.com
+
+[color]
+    ui = true
+    editor = vim
+[alias]
+    ci = commit
+    co = checkout
+    s = status
+#    st = stash
+    br = branch
+    rm = remote
+[mergetool "vimdiff"]
+    cmd = vim -f -d \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+[merge]
+    tool = vimdiff
+[color "diff"]
+    meta = black white bold   
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f

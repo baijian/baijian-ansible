@@ -1,0 +1,16 @@
+---
+- name: ensure git is installed - MacOSX
+  homebrew: name=git state=present
+  when: ansible_distribution == 'MacOSX'
+
+- name: ensure git is installed - Ubuntu
+  apt: pkg=git state=present
+  when: ansible_distribution == 'Ubuntu'
+
+- name: ensure git is installed - Fedora
+  yum: name=git state=present
+  when: ansible_distribution == 'Fedora'
+
+- name: configure .gitconfig
+  template: src=gitconfig
+            dest=~/.gitconfig

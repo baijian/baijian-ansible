@@ -1,3 +1,4 @@
+---
 - hosts: all
 
   vars_files:
@@ -9,9 +10,9 @@
       when: ansible_distribution == 'MaxOSX'
 
   roles:
-    - zsh
     - bin
     - git
+    - zsh
     - vim
     - pyenv
     - ansible
