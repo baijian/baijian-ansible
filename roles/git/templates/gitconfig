@@ -1,11 +1,8 @@
 [core]
     autocrlf = input
-    whitespace = trailing-space,space-before-tab,indent-with-non-tab
-
 [user]
     name = 柏健
-    email = jian.baij@gmail.com
-
+	email = jian.baij@gmail.com
 [color]
     ui = true
     editor = vim

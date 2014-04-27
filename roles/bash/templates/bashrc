@@ -1,0 +1,69 @@
+#if [[ ${EUID} == 0 ]] ; then
+#    PS1='\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] '
+#else 
+#    PS1='\[\033[01;32m\]π\[\033[01;34m\] \W \$\[\033[00m\] '
+#fi
+
+export PATH=$PATH:~/Bin
+
+PS1='$(git branch &>/dev/null; if [ $? -eq 0 ]; then echo "[\[\e[0;32m\]\u\[\e[01;34m\]@\[\e[0;31m\]\h\[\e[0;33m\]\w\[\e[01;33m\](\[\e[01;34m\]$(git branch | grep ^*|sed s/\*\ //) $(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; if [ "$?" -eq "0" ]; then echo "\[\e[01;32m\]clean"; else echo "\[\e[01;31m\]dirty"; fi)\[\e[01;33m\])\[\e[0m\]]\n\[\e[01;34m\]\$\[\e[0m\]"; else echo "[\[\e[0;32m\]\u\[\e[01;34m\]@\[\e[0;31m\]\h \[\e[0;33m\]\w\[\e[m\]]\n\[\e[01;34m\]\$"; fi) \[\e[0m\]'
+
+export LANG="en_US.UTF-8"
+export LANGUAGE="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+export PHPBREW_SET_PROMPT=1
+source $HOME/.phpbrew/bashrc
+
+source $HOME/perl5/perlbrew/etc/bashrc
+
+# [[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
+# pyenv
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
+#export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Home"
+export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
+#PATH=${JAVA_HOME}/bin:$PATH
+
+ANDROID_SDK=$HOME/Develop/android-sdk
+ANDROID_SDK_TOOLS=$ANDROID_SDK/tools
+ANDROID_SDK_PLATFORM_TOOL=$ANDROID_SDK/platform-tools
+PATH=$PATH:$ANDROID_SDK_TOOLS:$ANDROID_SDK_PLATFORM_TOOL
+PATH=$PATH:/usr/local/sbin
+PATH=$PATH:$HOME/Develop/android-ndk
+export PATH=$PATH
+
+#PATH=/usr/local/openresty/nginx/sbin:$PATH
+#export PATH=$PATH
+PATH=/Users/bj/Software/storm-0.9.0.1/bin:$PATH
+export PATH=$PATH
+
+alias ls='ls -G'
+
+# work bashrc
+if [ -f "$HOME/.bashrc_work" ] ; then
+    source $HOME/.bashrc_work
+fi
+
+export CLICOLOR=1
+export LSCOLORS=gxfxaxdxcxegedabagacad
+
+alias adbk='$ANDROID_SDK_PLATFORM_TOOL/adb kill-server'
+alias adbs='sudo $ANDROID_SDK_PLATFORM_TOOL/adb devices'
+alias adbr='adbk && adbs'
+
+alias lsport='sudo lsof -i -P | grep -i listen'
+
+#Vicky20130529
+alias rt='ssh rarnu@7thgen.info'
+
+alias 17web='ssh -p 58422 www@58.215.172.58'
+alias 17db='ssh -p 58422 www@58.215.160.80'
+alias 17test='ssh -p 58424 17startup@106.187.98.95'
+alias openrestynginx='/usr/local/openresty/nginx/sbin/nginx'
+alias irssi_baijian='irssi --connect=irc.freenode.net --nick=baijian --password=123456'
+#alias luajit='/usr/local/openresty/luajit/bin/luajit'
+
+#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

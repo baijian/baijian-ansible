@@ -1,0 +1,35 @@
+---
+- name: ensure pyenv is installed - MacOSX
+  homebrew: name=pyenv 
+            state=present
+  when: ansible_distribution == 'MacOSX'
+
+- name: install pyenv from source
+  git: repo=https://github.com/yyuu/pyenv.git
+       dest=~/.pyenv
+       update={{ update_pyenv }}
+  when: ansible_distribution == 'Ubuntu'
+
+- name: ensure dependencies for python - Ubuntu
+  sudo: yes
+  apt: pkg={{ item }}
+       state=present
+  with_items:
+    - build-essential
+    - libssl-dev
+    - zlib1g-dev
+    - libbz2-dev
+    - libreadline-dev
+    - libsqlite3-dev
+  when: ansible_distribution == 'Ubuntu'
+
+- name: install pythons
+  shell: (pyenv versions | grep '{{ item }}') || pyenv install {{ item }}
+         creates=~/.pyenv/versions/{{ item }}
+  with_items:
+    - "2.7.6"
+    - "3.3.4"
+
+- name: set python3 as default
+  copy: src=version
+        dest=~/.pyenv/version

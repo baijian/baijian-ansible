@@ -7,14 +7,13 @@
   pre_tasks:
     - name: homebrew should be installed before other tasks
       shell: command -v brew creates=/usr/local/bin/brew
-      when: ansible_distribution == 'MaxOSX'
+      when: ansible_distribution == 'MacOSX'
 
   roles:
+    - bash
     - bin
     - git
-    - zsh
-    - vim
     - pyenv
-    - ansible
-    - tmux
+    - role: avatar
+      when: ansible_distribution == 'MacOSX'
     - rbenv

@@ -1,7 +1,0 @@
-#!/bin/bash
-if [ -f "$HOME/Software/ansible/.virtualenv/bin/activate" ] ; then
-    source "$HOME/Software/ansible/.virtualenv/bin/activate"
-fi
-
-source "$HOME/Software/ansible/hacking/env-setup" -q
-PYENV_VERSION=2.7.6 exec "$ANSIBLE_HOME/bin/${0##/*/}" $@

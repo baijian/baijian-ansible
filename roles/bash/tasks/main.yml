@@ -1,0 +1,8 @@
+---
+- name: configure .bashrc
+  template: src=bashrc 
+            dest=~/.bashrc
+
+- name: configure .bash_profile
+  template: src=bash_profile 
+            dest=~/.bash_profile

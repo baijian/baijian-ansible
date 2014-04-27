@@ -1,0 +1,9 @@
+---
+- name: ensure avatars directory is ready
+  file: path={{ avatars_directory }}
+        state=directory
+        recurse=yes
+
+- name: copy avatars
+  copy: src=avatar-baijian.jpg
+        dest={{ avatars_directory }}
