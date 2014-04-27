@@ -19,3 +19,12 @@ steps on certain steps. You can run different plays at different times.
 $ ansible-playbook -i [hosts.xxx] playbook.yml
 
 $ ansible-playbook --connection=local -i hosts.local development-playbook.yml --extra-vars "ansible_distribution=MaxOSX"
+
+### TODO
+
+* vim
+* screen
+* tmux
+* terminal
+* ansible
+* zsh
