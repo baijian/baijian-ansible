@@ -4,8 +4,9 @@
   when: ansible_distribution == 'MacOSX'
 
 - name: ensure tmux is installed - Ubuntu
+  sudo: yes
   apt: pkg=tmux state=present
   when: ansible_distribution == 'Ubuntu'
 
 - name: configure tmux
-  templates: src=tmux.conf dest=~/.tmux.conf
+  template: src=tmux.conf dest=~/.tmux.conf
