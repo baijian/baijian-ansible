@@ -13,7 +13,9 @@
     - bash
     - bin
     - git
+    #- vim
     - pyenv
     - role: avatar
       when: ansible_distribution == 'MacOSX'
+    - tmux
     - rbenv
